@@ -1,0 +1,34 @@
+:root{
+    --gradient-bg1: #48ff00;
+    --gradient-bg2: #ff9900;
+    --text-color: #595858;
+    --btn-color: #ff7700;
+    --inputField-color: #28282b;
+    --btn-color-hover: #ff9500;
+    --input-outline-color: #ff6200;
+    --input-text-color: #d1d1d1;
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--gradient-bg1), var(--gradient-bg2));
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+}
+@keyframes gradientShift{
+    0%{
+        background-position: 0% 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0% 50%;
+    }
+}
+h1,h2,h3,h4,p{
+    margin: 0;
+}
