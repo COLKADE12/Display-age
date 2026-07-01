@@ -100,7 +100,7 @@ const Age = () => {
             <h1 className='display'>AGE DISPLAY </h1>
         )}
         </div>
-        <div key={message} className="message">{message !== "" ? `${message}` : "Enter your birth year to reveal your age." }</div>
+        <div key={message} className="message">{message !== "" ? `${message}` : "Enter your birthday date to reveal your age." }</div>
         <div className="input-field">
             <input className="year" type="date" placeholder="Year of birth" min="1900" max="2100" value={birthday} onChange={(e) => setbirthday(e.target.value)} onKeyDown={(e) => {if(e.key === "Enter"){calculateAge();}}} required />
             <button type="button" className="submitBtn" onClick={calculateAge}>Enter</button>

@@ -91,5 +91,8 @@
     color: #ff3700dc;
 }
 @media (max-width:768px) {
-    
+    .submitBtn:hover{
+        background-color: var(--btn-color);
+        color: var(--text-color);
+    }
 }
