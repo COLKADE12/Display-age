@@ -35,7 +35,7 @@ const Age = () => {
 
         if(years < 0){
             setAge(null);
-            setMessage("Please enter a valid birth year.")
+            setMessage("Please enter a valid birthday date.")
             return;
         }
         else if(years < 18){
@@ -77,33 +77,79 @@ const Age = () => {
         setAge({years,months,days});
     }
 
-    
+    const [username, setUsername] = useState('')
+    const[inputName, setInputName] = useState('')
+
+    function displayName(){
+        setUsername(`${inputName} is:`);
+
+        if(!inputName){
+            setUsername('')
+        }
+
+    }
+    function compiledFunctions(){
+        displayName();
+        calculateAge();
+    }
 
   return (
     <div className="container">
         <div key={age}>{age !== null ? (
-            <div className="display">
-                <div className="age-container">
-                    <h3 className='age'>{age ?.years}</h3>
-                    <p className='ageText'>Years</p>
+            <div>
+                <div className="username">
+                    <h2>{username !== "" ? `${username}` : ""}</h2>
                 </div>
-                <div className="age-container">
-                    <h3 className='ageNumber'>{age?.months}</h3>
-                    <p className='ageText'>Months</p>
+                <div className="display">
+                    <div className="age-container">
+                        <h3 className='age'>{age ?.years}</h3>
+                        <p className='ageText'>Years</p>
+                    </div>
+                    <span className="counter-separator">:</span>
+                    <div className="age-container">
+                        <h3 className='ageNumber'>{age?.months}</h3>
+                        <p className='ageText'>Months</p>
+                    </div>
+                    <span className="counter-separator">:</span>
+                    <div className="age-container">
+                        <h3 className='age'>{age?.days}</h3>
+                        <p className='ageText'>days</p>
+                    </div>
                 </div>
-                <div className="age-container">
-                    <h3 className='age'>{age?.days}</h3>
-                    <p className='ageText'>days</p>
+                {username && (
+                    <div className='endUsername'>
+                    <h2>OLD</h2>
                 </div>
+                )}
             </div>
         ) : (
-            <h1 className='display'>AGE DISPLAY </h1>
+            <h1 className='header'>AGE DISPLAY </h1>
         )}
         </div>
-        <div key={message} className="message">{message !== "" ? `${message}` : "Enter your birthday date to reveal your age." }</div>
+        <div key={message} className="message">
+            {message !== "" ? `${message}` : "Enter your birthday date to reveal your age." }
+        </div>
         <div className="input-field">
-            <input className="year" type="date" placeholder="Year of birth" min="1900" max="2100" value={birthday} onChange={(e) => setbirthday(e.target.value)} onKeyDown={(e) => {if(e.key === "Enter"){calculateAge();}}} required />
-            <button type="button" className="submitBtn" onClick={calculateAge}>Enter</button>
+            <div className="user-input">
+                <input
+                    type="text"
+                    placeholder='Your Name (optional)' 
+                    className='year' value={inputName} 
+                    onChange={(e) => setInputName(e.target.value)} 
+                    onKeyDown={(e) => {if(e.key === "Enter"){displayName();}}} 
+                     />
+                <input
+                    className="year" 
+                    type="date" 
+                    placeholder="Year of birth" 
+                    min="1900" 
+                    max="2100" 
+                    value={birthday} 
+                    onChange={(e) => setbirthday(e.target.value)} 
+                    onKeyDown={(e) => {if(e.key === "Enter"){calculateAge();}}} required 
+                    />
+            </div>
+            <button type="button" className="submitBtn" onClick={compiledFunctions}>Enter</button>
         </div>
         <div className="info">Your age will appear above when you submit your birth year.</div>
     </div>
