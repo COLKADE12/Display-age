@@ -151,7 +151,7 @@ const Age = () => {
             </div>
             <button type="button" className="submitBtn" onClick={compiledFunctions}>Enter</button>
         </div>
-        <div className="info">Your age will appear above when you submit your birth year.</div>
+        <div className="info">Your age will appear above when you submit your birthday date.</div>
     </div>
   )
 }
