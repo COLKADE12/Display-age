@@ -77,20 +77,27 @@ const Age = () => {
         setAge({years,months,days});
     }
 
-    const [username, setUsername] = useState('')
-    const[inputName, setInputName] = useState('')
+    const [username, setUsername] = useState(null);
+    const[inputName, setInputName] = useState("");
 
     function displayName(){
-        setUsername(`${inputName} is:`);
-
-        if(!inputName){
-            setUsername('')
+        if(inputName.trim() !== ""){
+            setUsername(`${inputName} is:`);
         }
-
+        return;
     }
     function compiledFunctions(){
         displayName();
         calculateAge();
+
+        setInputName("")
+        setbirthday("")
+    }
+
+    function onKeyDown(e){
+        if (e.key === "Enter"){
+            compiledFunctions();
+        }
     }
 
   return (
@@ -98,7 +105,7 @@ const Age = () => {
         <div key={age}>{age !== null ? (
             <div>
                 <div className="username">
-                    <h2>{username !== "" ? `${username}` : ""}</h2>
+                    <h2>{username ? `${username}` : null}</h2>
                 </div>
                 <div className="display">
                     <div className="age-container">
@@ -118,8 +125,8 @@ const Age = () => {
                 </div>
                 {username && (
                     <div className='endUsername'>
-                    <h2>OLD</h2>
-                </div>
+                        <h2>OLD</h2>
+                    </div>
                 )}
             </div>
         ) : (
@@ -136,17 +143,16 @@ const Age = () => {
                     placeholder='Your Name (optional)' 
                     className='year' value={inputName} 
                     onChange={(e) => setInputName(e.target.value)} 
-                    onKeyDown={(e) => {if(e.key === "Enter"){displayName();}}} 
+                    onKeyDown={onKeyDown} 
                      />
                 <input
                     className="year" 
                     type="date" 
                     placeholder="Year of birth" 
-                    min="1900" 
-                    max="2100" 
                     value={birthday} 
                     onChange={(e) => setbirthday(e.target.value)} 
-                    onKeyDown={(e) => {if(e.key === "Enter"){calculateAge();}}} required 
+                    onKeyDown={onKeyDown}
+                    required 
                     />
             </div>
             <button type="button" className="submitBtn" onClick={compiledFunctions}>Enter</button>
